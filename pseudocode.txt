@@ -1,0 +1,69 @@
+Pseudocode for Vaccine Distribution Optimization
+
+function vaccineDistributionDP(regions, totalVaccines, costPerVaccine)
+    numRegions = length(regions)
+    Initialize DP table (dp) and distribution array
+
+    For i from 1 to numRegions do
+        need = regions[i].healthcare_needs
+        For j from 0 to totalVaccines do
+            If need ≤ j then
+                If dp[i][j - need] + need > dp[i][j] then
+                    dp[i + 1][j] = dp[i][j - need] + need
+                    distribution[i][j] = need
+                Else
+                    dp[i + 1][j] = dp[i][j]
+            Else
+                dp[i + 1][j] = dp[i][j]
+    
+    maxVaccinated = dp[numRegions + 1][totalVaccines]
+    coverage = calculateCoverage(distribution, regions)
+    totalCost = maxVaccinated * costPerVaccine
+    
+    Return maxVaccinated, coverage, totalCost
+End Function
+
+function calculateCoverage(distribution, regions)
+    coverage = 0
+    For i from 1 to length(regions) do
+        vaccinesGiven = distribution[i][end]
+        coverage += min(vaccinesGiven, regions[i].healthcare_needs) / regions[i].healthcare_needs
+    End For
+    coverage = (coverage / length(regions)) * 100
+    Return coverage
+End Function
+
+Pseudocode for Medical Supply Chain Optimization
+
+function medicalSupplyDP(clinics, totalSupplies, costPerSupply)
+    numClinics = length(clinics)
+    Initialize DP table (dp) and distribution array
+
+    For i from 1 to numClinics do
+        need = clinics[i].medical_needs
+        For j from 0 to totalSupplies do
+            If need ≤ j then
+                If dp[i][j - need] + need > dp[i][j] then
+                    dp[i + 1][j] = dp[i][j - need] + need
+                    distribution[i][j] = need
+                Else
+                    dp[i + 1][j] = dp[i][j]
+            Else
+                dp[i + 1][j] = dp[i][j]
+    
+    maxSupplies = dp[numClinics + 1][totalSupplies]
+    coverage = calculateCoverage(distribution, clinics)
+    totalCost = maxSupplies * costPerSupply
+    
+    Return maxSupplies, coverage, totalCost
+End Function
+
+function calculateCoverage(distribution, clinics)
+    coverage = 0
+    For i from 1 to length(clinics) do
+        suppliesGiven = distribution[i][end]
+        coverage += min(suppliesGiven, clinics[i].medical_needs) / clinics[i].medical_needs
+    End For
+    coverage = (coverage / length(clinics)) * 100
+    Return coverage
+End Function

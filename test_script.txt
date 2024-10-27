@@ -1,0 +1,39 @@
+% Test Script for Vaccine and Medical Supply Distribution
+
+% Part 1: Vaccine Distribution
+% Define regions with individual healthcare needs
+regions(1) = struct('name', 'Region A', 'population', 100000, 'risk_level', 8, 'healthcare_needs', 5000);
+regions(2) = struct('name', 'Region B', 'population', 50000, 'risk_level', 5, 'healthcare_needs', 2000);
+regions(3) = struct('name', 'Region C', 'population', 75000, 'risk_level', 7, 'healthcare_needs', 3000);
+
+% Define the total number of vaccines available and cost per vaccine
+totalVaccines = 6000;
+costPerVaccine = 10; % Cost per vaccine
+
+% Call the vaccine distribution function
+[maxVaccinated, coverage, totalCost] = vaccineDistributionDP(regions, totalVaccines, costPerVaccine);
+
+% Display the results
+disp('Vaccine Distribution Results:');
+disp(['Maximum number of people vaccinated: ', num2str(maxVaccinated)]);
+disp(['Coverage percentage: ', num2str(coverage), '%']);
+disp(['Total distribution cost: $', num2str(totalCost)]);
+
+% Part 2: Medical Supply Distribution
+% Define clinics with individual medical needs
+clinics(1) = struct('name', 'Clinic A', 'population', 10000, 'medical_needs', 3000);
+clinics(2) = struct('name', 'Clinic B', 'population', 5000, 'medical_needs', 1500);
+clinics(3) = struct('name', 'Clinic C', 'population', 8000, 'medical_needs', 2500);
+
+% Define the total number of supplies available and cost per supply
+totalSupplies = 20000; % Total medical supplies available
+costPerSupply = 5;     % Cost per medical supply
+
+% Call the medical supply distribution function
+[maxSupplies, coverage, totalCost] = medicalSupplyDP(clinics, totalSupplies, costPerSupply);
+
+% Display the results
+disp('Medical Supply Distribution Results:');
+disp(['Maximum number of supplies allocated: ', num2str(maxSupplies)]);
+disp(['Coverage percentage: ', num2str(coverage), '%']);
+disp(['Total distribution cost: $', num2str(totalCost)]);
